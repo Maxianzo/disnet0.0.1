@@ -19,33 +19,36 @@
 
 <body>
 
-  <div class="container-fluid">
-      <a href="index.html" class="navbar-brand">Disneg</a>
-      <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-          <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarCollapse">
-          <div class="navbar-nav">
-              <a href="index.html" class="nav-item nav-link active">Home</a>
-              <a href="disneg.html" class="nav-item nav-link">Empresas</a>
-              <a href="rubro.html" class="nav-item nav-link">rubro</a>
-              <a href="elmejorprecio.html" class="nav-item nav-link">El mejor precio</a>
-              <a href="producto.html" class="nav-item nav-link">Productos</a>
-              <a href="filtro.html" class="nav-item nav-link">Filtros</a>
-          </div>
 
-          <div class="navbar-nav ms-auto">
-              <a href="loading.html" class="nav-item nav-link">Register</a>
 
-                 <!--
-                      De aca saque el loanding
-                  https://freefrontend.com/css-login-forms/ -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a href="index.html" class="navbar-brand">Disneg</a>
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav">
+                        <a href="index.html" class="nav-item nav-link active">Home</a>
+                        <a href="empresas.php" class="nav-item nav-link">Empresas</a>
+                        <a href="rubro.html" class="nav-item nav-link">rubro</a>
+                        <a href="elmejorprecio.html" class="nav-item nav-link">El mejor precio</a>
+                        <a href="producto.html" class="nav-item nav-link">Productos</a>
+                        <a href="filtro.html" class="nav-item nav-link">Filtros</a>
+                    </div>
 
-              <a href="loading.html" class="nav-item nav-link">Login</a>
-          </div>
-      </div>
-  </div>
-</nav>
+                    <div class="navbar-nav ms-auto">
+                        <a href="loading.html" class="nav-item nav-link">Register</a>
+
+                           <!--
+                                De aca saque el loanding
+                            https://freefrontend.com/css-login-forms/ -->
+
+                        <a href="loading.html" class="nav-item nav-link">Login</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
 
 
 
@@ -58,30 +61,56 @@
         <p><a href="https://www.tutorialrepublic.com" target="_blank" class="btn btn-success btn-lg">mira nuestras mejores ofertas</a></p>
     </div>
   </div>
-<div class="container">
-    <div class="row">
-        <div class="col-md-4">
-            <h2>
-              <img src="./images/th.jpg" class="img-thumbnail" alt="Thumbnail Image">
-            DISTROLAC</h2>
-            <p>Encuentra aca los mejores podructos en fiambres y lacteos</p>
-            <p><a href="empre" target="_blank" class="btn btn-success"conosenos</a></p>
-          </div>
-        <div class="col-md-4">
-            <h2>
-       <img src="./images/th.jpg" class="img-thumbnail" alt="Thumbnail Image">
-         viento andino</h2>
-            <p>encuentra nustros mejores precios en hambrgesas y salchicas</p>
-            <p><a href="https://www.tutorialrepublic.com/css-tutorial/" target="_blank" class="btn btn-success">Learn More &raquo;</a></p>
+<br>
+      <?php
+      // 1) Conexion
+      $conexion = mysqli_connect("127.0.0.1", "root", "");
+      mysqli_select_db($conexion, "disnet");
+
+      // 2) Preparar la orden SQL
+      // Sintaxis SQL SELECT
+      // SELECT * FROM nombre_tabla
+      // => Selecciona todos los campos de la siguiente tabla
+      // SELECT campos_tabla FROM nombre_tabla
+      // => Selecciona los siguientes campos de la siguiente tabla
+      $consulta='SELECT * FROM vientoandino';
+
+      // 3) Ejecutar la orden y obtenemos los registros
+      $datos= mysqli_query($conexion, $consulta);
+
+
+      // 4) el while recorre todos los registros y genera una CARD PARA CADA UNA
+      while (  $reg = mysqli_fetch_array($datos) ) {?>
+
+<section>
+
+
+
+
+<div class="" style="    margin: 0px;
+    height: 50%;
+    width: 16%;
+">
+
+
+
+          <img class="card-img-top" src="data:image/jpg;base64, <?php echo base64_encode($reg['imagen'])?>" alt="" width="100px" height="100px")>
+          <h3 class="card-title" style="width: 100%; font-size:25px;"><?php echo ucwords($reg['producto']) ?></h3>
+          <span><?php echo $reg['precio']; ?></span>
+          <a href="vientoadid.php?id=<?php echo $reg['id'] ;?>"class="btn btn-primary">Go somewhere</a>
+  </div>
+</section>
+      <?php }?>
+<!--  INTENTO PARA OTRO CONTEINER
+
+
+      <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="..." alt="Card image cap">
+        <div class="card-body">
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
         </div>
-        <div class="col-md-4">
-            <h2>
-            <img src="./images/th.jpg" class="img-thumbnail" alt="Thumbnail Image">
-         dsitribuidora castro</h2>
-            <p>encuenra todos los productos de limpiesa para tu negocio y vivienda</p>
-            <p><a href="https://www.tutorialrepublic.com/twitter-bootstrap-tutorial/" target="_blank" class="btn btn-success">Learn More &raquo;</a></p>
-        </div>
-    </div>
+      </div>
+-->
 </div>
     <hr>
     <footer>
